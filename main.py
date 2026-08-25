@@ -107,3 +107,51 @@ class MainApp:
             self.tree.delete()
         for item in self.manager.get_items():
             self.tree.insert("",tk.END , values=[item["Name"],item["Quantity"],item["Price"],item["Category"]])
+def logout(self):
+        self.manager.close()
+        self.root.destroy()
+        log_root = tk.Tk()
+        Loginwindow(log_root,lambda u:MainApp(u))
+        log_root.mainloop()        
+class AddItemDialog:
+    def __init__(self,parent,manager,refresh):
+        self.manager = manager
+        self.refresh = refresh
+
+        self.window = tk.Toplevel(parent)
+        self.window.title("Add Item")
+        self.window.geometry("480x360")
+
+        freame = ttk.Frame(self.window, padding=15)
+        freame.pack(fill=tk.BOTH,expand=True)
+
+        name_label = ttk.Label(freame,text="Name")
+        name_label.grid(row=0,column=0,sticky="w",pady=10)
+
+        name_entry = ttk.Entry(freame,width=30)
+        name_entry.grid(row=0,column=1,sticky="w",pady=10)
+
+        quantity_label = ttk.Label(freame,text="Quantity")
+        quantity_label.grid(row=1,column=1,sticky="w",pady=10)
+
+        quantity_entry = ttk.Entry(freame,width=30)
+        quantity_entry.grid(row=1,column=1,sticky="w",pady=10)
+
+        price_label = ttk.Label(freame,text="Price")
+        price_label.grid(row=2,column=1,sticky="w",pady=10)
+
+        price_entry = ttk.Entry(freame,width=30)
+        price_entry.grid(row=2,column=1,sticky="w",pady=10)
+
+        category_label = ttk.Label(freame,text="Category")
+        category_label.grid(row=3,column=1,sticky="w",pady=10)
+
+        category_entry = ttk.Entry(freame,width=30)
+        category_entry.grid(row=3,column=1,sticky="w",pady=10)
+
+        self.add_button = ttk.Button(freame,text="ADD ITEM",command=self.add_item)
+        self.add_button.pack(side="right",padx=11)
+if __name__=="__main__":
+    root = tk.Tk()
+    Loginwindow(root,lambda u:MainApp(u))
+    root.mainloop()
